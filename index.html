@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f3eb">
+  <meta name="description" content="The personal portfolio of Kierstein Marky Mallari, BSIT-WMAD student and cadet officer.">
+  <title>Kierstein Marky Mallari | Portfolio</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --paper: #f5f3eb;
+      --ink: #182923;
+      --muted: #59665f;
+      --green: #23684f;
+      --green-dark: #174634;
+      --lime: #d9ed87;
+      --coral: #e77b62;
+      --line: #d8ddd2;
+      --white: #fffefa;
+      --serif: Georgia, 'Times New Roman', serif;
+      --sans: 'Aptos', 'Segoe UI', sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 92px; }
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-size: 17px;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; }
+    button { font: inherit; }
+    .wrap { width: min(1120px, calc(100% - 48px)); margin-inline: auto; }
+    .topbar {
+      position: sticky;
+      z-index: 10;
+      top: 0;
+      border-bottom: 1px solid rgba(24, 41, 35, .11);
+      background: rgba(245, 243, 235, .94);
+      backdrop-filter: blur(14px);
+    }
+    .nav-row { height: 76px; display: flex; align-items: center; justify-content: space-between; }
+    .brand { text-decoration: none; font-size: 15px; font-weight: 800; letter-spacing: .02em; }
+    .brand-mark { display: inline-grid; width: 34px; height: 34px; margin-right: 9px; place-items: center; border-radius: 50%; background: var(--green); color: white; font-family: var(--serif); font-size: 17px; }
+    .menu-wrap { position: relative; }
+    .menu-button {
+      display: flex; align-items: center; gap: 12px; min-height: 44px; padding: 0 16px;
+      border: 1px solid var(--line); border-radius: 4px; background: var(--white); color: var(--ink);
+      font-size: 14px; font-weight: 750; cursor: pointer;
+    }
+    .chevron { width: 8px; height: 8px; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: rotate(45deg) translateY(-2px); transition: transform .2s ease; }
+    .menu-button[aria-expanded="true"] .chevron { transform: rotate(225deg) translate(-1px, -1px); }
+    .menu {
+      position: absolute; top: calc(100% + 9px); right: 0; width: 210px; padding: 7px;
+      border: 1px solid var(--line); border-radius: 5px; background: var(--white);
+      box-shadow: 0 14px 32px rgba(24, 41, 35, .13);
+      opacity: 0; visibility: hidden; transform: translateY(-6px); transition: opacity .18s ease, transform .18s ease, visibility .18s;
+    }
+    .menu.open { opacity: 1; visibility: visible; transform: translateY(0); }
+    .menu a { display: block; padding: 10px 11px; border-radius: 3px; text-decoration: none; font-size: 14px; font-weight: 700; }
+    .menu a:hover, .menu a:focus-visible { background: #edf2e8; outline: none; }
+    .hero { position: relative; overflow: hidden; padding: 70px 0 76px; background: #142b31; color: #f6f4ec; }
+    .hero::before { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(13, 29, 34, .91), rgba(13, 29, 34, .68)), url("dim-vector-background.svg") center / cover; content: ''; }
+    .hero-grid { position: relative; display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(290px, .8fr); align-items: center; gap: 52px; }
+    .hero .eyebrow { color: var(--lime); }
+    .hero h1 span { color: var(--lime); }
+    .hero .hero-copy { color: #e1e8e1; }
+    .eyebrow { display: flex; align-items: center; gap: 10px; margin: 0 0 18px; color: var(--green); font-size: 12px; font-weight: 850; letter-spacing: .13em; text-transform: uppercase; }
+    .eyebrow::before { width: 28px; height: 2px; background: var(--coral); content: ''; }
+    h1, h2, h3, p { margin-top: 0; }
+    h1 { max-width: 700px; margin-bottom: 18px; font-family: var(--serif); font-size: clamp(3rem, 6vw, 5.35rem); font-weight: 700; line-height: .99; letter-spacing: 0; }
+    h1 span { color: var(--green); }
+    .hero-copy { max-width: 590px; margin-bottom: 28px; color: #43544b; font-size: 19px; font-weight: 600; }
+    .hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
+    .button { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 0 19px; border: 1px solid var(--green); border-radius: 3px; background: var(--green); color: white; text-decoration: none; font-size: 14px; font-weight: 800; transition: background .2s ease, transform .2s ease; }
+    .button:hover { transform: translateY(-2px); background: var(--green-dark); }
+    .button.secondary { background: transparent; color: var(--ink); border-color: var(--line); }
+    .hero .button { border-color: var(--lime); background: var(--lime); color: #142b31; }
+    .hero .button:hover { border-color: #edf8bf; background: #edf8bf; }
+    .hero .button.secondary { border-color: rgba(246, 244, 236, .55); background: transparent; color: #f6f4ec; }
+    .portrait-stage { position: relative; width: min(100%, 380px); justify-self: center; padding: 18px 18px 0 0; }
+    .portrait-stage::before { position: absolute; z-index: 0; inset: 0 0 20px 20px; border: 1px solid rgba(217, 237, 135, .8); content: ''; pointer-events: none; }
+    .portrait { position: relative; display: block; width: 100%; aspect-ratio: 4 / 4.65; object-fit: cover; object-position: center 38%; background: #dbe8d6; }
+    .portrait-label { position: absolute; right: -9px; bottom: 33px; max-width: 190px; padding: 13px 16px; background: var(--lime); color: var(--ink); font-size: 13px; font-weight: 850; line-height: 1.35; }
+    .section { padding: 82px 0; border-top: 1px solid var(--line); }
+    .section-heading { display: flex; align-items: end; justify-content: space-between; gap: 24px; margin-bottom: 34px; }
+    .section-heading h2 { max-width: 630px; margin: 0; font-family: var(--serif); font-size: clamp(2.2rem, 4vw, 3.45rem); line-height: 1.08; }
+    .section-heading p { max-width: 370px; margin: 0; color: var(--muted); font-weight: 600; }
+    .about-layout { display: grid; grid-template-columns: .7fr 1.3fr; gap: 64px; align-items: start; }
+    .about-tag { padding: 20px 22px; border-left: 4px solid var(--coral); background: var(--white); color: var(--green-dark); font-family: var(--serif); font-size: 23px; font-weight: 700; line-height: 1.38; }
+    .about-text p { margin-bottom: 16px; color: #43544b; font-weight: 600; }
+    .quote { margin: 24px 0 0; padding: 20px 0 20px 23px; border-left: 3px solid var(--green); color: var(--ink); font-family: var(--serif); font-size: 24px; font-weight: 700; line-height: 1.4; }
+    .quote cite { display: block; margin-top: 10px; color: var(--muted); font-family: var(--sans); font-size: 12px; font-style: normal; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+    .honors { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .honor { min-height: 220px; padding: 24px 25px 28px 0; }
+    .honor + .honor { padding-left: 25px; border-left: 1px solid var(--line); }
+    .honor-number { display: inline-grid; width: 38px; height: 38px; margin-bottom: 27px; place-items: center; border-radius: 50%; background: var(--lime); font-size: 13px; font-weight: 900; }
+    .honor h3 { margin-bottom: 10px; font-size: 18px; font-weight: 850; line-height: 1.35; }
+    .honor p { margin: 0; color: var(--muted); font-size: 14px; font-weight: 700; }
+    .education { display: grid; grid-template-columns: 1fr 1fr; gap: 0 56px; }
+    .school { display: grid; grid-template-columns: 92px 1fr; gap: 14px; padding: 21px 0; border-top: 1px solid var(--line); }
+    .school-level { padding-top: 3px; color: var(--green); font-size: 12px; font-weight: 900; letter-spacing: .08em; text-transform: uppercase; }
+    .school h3 { margin: 0 0 5px; font-size: 17px; font-weight: 850; line-height: 1.35; }
+    .school p { margin: 0; color: var(--muted); font-size: 14px; font-weight: 650; }
+    .contact { padding: 70px 0; background: var(--green-dark); color: white; }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 44px; align-items: end; }
+    .contact h2 { max-width: 470px; margin-bottom: 12px; font-family: var(--serif); font-size: clamp(2.4rem, 4vw, 3.8rem); line-height: 1.05; }
+    .contact-intro { margin: 0; color: #d5e4da; font-weight: 600; }
+    .contact-list { display: grid; grid-template-columns: 1fr 1fr; gap: 18px 24px; margin: 0; }
+    .contact-list div { min-width: 0; }
+    .contact-list div:last-child { grid-column: 1 / -1; }
+    .contact-list dt { margin-bottom: 3px; color: #b9d478; font-size: 11px; font-weight: 900; letter-spacing: .11em; text-transform: uppercase; }
+    .contact-list dd { margin: 0; overflow-wrap: anywhere; font-size: 15px; font-weight: 750; }
+    .contact-list a { text-decoration-thickness: 1px; text-underline-offset: 3px; }
+    footer { padding: 18px 0; background: #123729; color: #d5e4da; font-size: 12px; font-weight: 650; }
+    .footer-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+    .footer-top-link { flex-shrink: 0; color: var(--lime); text-decoration: none; font-weight: 800; }
+    .footer-top-link::after { margin-left: 5px; content: '↑'; }
+    .footer-top-link:hover { text-decoration: underline; text-underline-offset: 3px; }
+    :focus-visible { outline: 3px solid var(--coral); outline-offset: 3px; }
+    @media (max-width: 760px) {
+      .wrap { width: min(100% - 36px, 560px); }
+      .hero { padding: 50px 0 58px; }
+      .hero-grid { grid-template-columns: 1fr; gap: 36px; }
+      .hero-copy { font-size: 17px; }
+      .portrait-stage { width: min(75%, 340px); justify-self: start; margin-left: 12px; }
+      .section { padding: 60px 0; }
+      .section-heading { display: block; }
+      .section-heading p { margin-top: 13px; }
+      .about-layout { grid-template-columns: 1fr; gap: 25px; }
+      .honors { grid-template-columns: 1fr; }
+      .honor, .honor + .honor { min-height: auto; padding: 22px 0; border-left: 0; }
+      .honor + .honor { border-top: 1px solid var(--line); }
+      .honor-number { margin-bottom: 12px; }
+      .education { grid-template-columns: 1fr; }
+      .contact-grid { grid-template-columns: 1fr; gap: 30px; }
+    }
+    @media (max-width: 420px) {
+      .wrap { width: calc(100% - 30px); }
+      .nav-row { height: 68px; }
+      .brand { font-size: 13px; }
+      .menu-button { padding: 0 12px; }
+      .school { grid-template-columns: 74px 1fr; gap: 10px; }
+      .contact-list { grid-template-columns: 1fr; gap: 14px; }
+      .footer-row { align-items: flex-start; flex-direction: column; gap: 4px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <nav class="nav-row wrap" aria-label="Main navigation">
+      <a class="brand" href="#home"><span class="brand-mark" aria-hidden="true">K</span>KIERSTEIN MALLARI</a>
+      <div class="menu-wrap">
+        <button class="menu-button" id="menu-button" type="button" aria-expanded="false" aria-controls="site-menu">
+          Explore <span class="chevron" aria-hidden="true"></span>
+        </button>
+        <div class="menu" id="site-menu">
+          <a href="#about">About me</a>
+          <a href="#recognition">Certificates</a>
+          <a href="#education">Education</a>
+          <a href="#contact">Contact</a>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="hero-grid wrap">
+        <div>
+          <p class="eyebrow">Student · Cadet Officer · Future IT Professional</p>
+          <h1>Kierstein Marky <span>Mallari</span></h1>
+          <p class="hero-copy">A BSIT-WMAD student at Nueva Vizcaya State University, building skills with purpose and leading through service.</p>
+          <div class="hero-actions">
+            <a class="button" href="#about">Get to know me</a>
+            <a class="button secondary" href="#contact">Contact</a>
+          </div>
+        </div>
+        <div class="portrait-stage">
+          <img class="portrait" src="profile-photo.jpg" alt="Kierstein standing in a mountain landscape">
+          <span class="portrait-label">Learning with purpose.<br>Leading by example.</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="about">
+      <div class="wrap">
+        <div class="section-heading">
+          <div><p class="eyebrow">A little about me</p><h2>Growing through learning and service.</h2></div>
+          <p>Curious about technology. Committed to becoming a leader others can count on.</p>
+        </div>
+        <div class="about-layout">
+          <div class="about-tag">Kierstein Marky Mallari<br>BSIT-WMAD Student</div>
+          <div class="about-text">
+            <p>I am currently taking Bachelor of Science in Information Technology, major in Web and Mobile Application Development (BSIT-WMAD) at Nueva Vizcaya State University, Bayombong Campus.</p>
+            <p>As a cadet officer, I am learning that leadership is not about standing above others; it is about showing up, serving with integrity, and helping the whole team move forward. I bring that same discipline and determination to my studies and future in technology.</p>
+            <blockquote class="quote">“Lead with courage, serve with humility, and keep moving forward. Every challenge is a chance to become someone others can rely on.”<cite>A cadet's commitment</cite></blockquote>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="recognition">
+      <div class="wrap">
+        <div class="section-heading">
+          <div><p class="eyebrow">Training & recognition</p><h2>Milestones that shape my leadership.</h2></div>
+          <p>Experiences that strengthen discipline, teamwork, and service to the community.</p>
+        </div>
+        <div class="honors">
+          <article class="honor">
+            <span class="honor-number">01</span>
+            <h3>RSCT-ARAPT31-32-2025</h3>
+            <p>Class 01</p>
+          </article>
+          <article class="honor">
+            <span class="honor-number">02</span>
+            <h3>ARAPT41-42-2026</h3>
+            <p>Class 02</p>
+          </article>
+          <article class="honor">
+            <span class="honor-number">03</span>
+            <h3>Provincial Youth Leadership Summit</h3>
+            <p>Bayombong Representative</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="education">
+      <div class="wrap">
+        <div class="section-heading">
+          <div><p class="eyebrow">Background</p><h2>Where my journey began.</h2></div>
+        </div>
+        <div class="education">
+          <article class="school">
+            <div class="school-level">College</div>
+            <div><h3>Nueva Vizcaya State University</h3><p>Currently studying · Bayombong Campus · BSIT-WMAD</p></div>
+          </article>
+          <article class="school">
+            <div class="school-level">High school</div>
+            <div><h3>Nueva Vizcaya General Comprehensive High School</h3><p>Graduate · Bayombong</p></div>
+          </article>
+          <article class="school">
+            <div class="school-level">Elementary</div>
+            <div><h3>Bayombong Central School SPED Center</h3><p>Graduate · Bayombong</p></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact" id="contact">
+      <div class="contact-grid wrap">
+        <div>
+          <p class="eyebrow" style="color:#d9ed87">Say hello</p>
+          <h2>Let's connect and keep moving forward.</h2>
+          <p class="contact-intro">For opportunities, collaboration, or a friendly conversation.</p>
+        </div>
+        <dl class="contact-list">
+          <div><dt>Facebook</dt><dd>Mallari Kierstein</dd></div>
+          <div><dt>Phone</dt><dd><a href="tel:+639679101461">0967 910 1461</a></dd></div>
+          <div><dt>Email</dt><dd><a href="mailto:markymallari07@gmail.com">markymallari07@gmail.com</a></dd></div>
+        </dl>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-row wrap">
+      <span>Kierstein Marky Mallari · Personal Portfolio</span>
+      <span>Built with purpose in Bayombong, Nueva Vizcaya</span>
+      <a class="footer-top-link" href="#home">Back to top</a>
+    </div>
+  </footer>
+
+  <script>
+    const menuButton = document.querySelector('#menu-button');
+    const siteMenu = document.querySelector('#site-menu');
+
+    function setMenuOpen(isOpen) {
+      menuButton.setAttribute('aria-expanded', String(isOpen));
+      siteMenu.classList.toggle('open', isOpen);
+    }
+
+    menuButton.addEventListener('click', () => {
+      setMenuOpen(menuButton.getAttribute('aria-expanded') !== 'true');
+    });
+
+    siteMenu.addEventListener('click', (event) => {
+      if (event.target.closest('a')) setMenuOpen(false);
+    });
+
+    document.addEventListener('click', (event) => {
+      if (!event.target.closest('.menu-wrap')) setMenuOpen(false);
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') {
+        setMenuOpen(false);
+        menuButton.focus();
+      }
+    });
+  </script>
+</body>
+</html>
